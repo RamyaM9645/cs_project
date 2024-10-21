@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from .forms import StudentRegisterForm, AlumniRegisterForm, UserLoginForm
-from .models import Student, Alumni
+from user.models import Student, Alumni
 
 # Student Registration View
 def stud_register(request):
@@ -22,7 +22,7 @@ def stud_register(request):
             return redirect('stud_login')
     else:
         form = StudentRegisterForm()
-    return render(request, 'users/stud_register.html', {'form': form})
+    return render(request, 'authen/stud_register.html', {'form': form})
 
 # Alumni Registration View
 def alum_register(request):
@@ -42,7 +42,7 @@ def alum_register(request):
             return redirect('alum_login')
     else:
         form = AlumniRegisterForm()
-    return render(request, 'users/alum_register.html', {'form': form})
+    return render(request, 'authen/alum_register.html', {'form': form})
 
 # Student Login View
 def stud_login(request):
@@ -59,7 +59,7 @@ def stud_login(request):
                 messages.error(request, 'Invalid credentials or you are not registered as a student.')
     else:
         form = UserLoginForm()
-    return render(request, 'users/stud_login.html', {'form': form})
+    return render(request, 'authen/stud_login.html', {'form': form})
 
 # Alumni Login View
 def alum_login(request):
@@ -76,4 +76,4 @@ def alum_login(request):
                 messages.error(request, 'Invalid credentials or you are not registered as alumni.')
     else:
         form = UserLoginForm()
-    return render(request, 'users/alum_login.html', {'form': form})
+    return render(request, 'authen/alum_login.html', {'form': form})
