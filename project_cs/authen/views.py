@@ -54,7 +54,7 @@ def stud_login(request):
             user = authenticate(request, username=username, password=password)
             if user is not None and hasattr(user, 'student'):
                 login(request, user)
-                return redirect('student_dashboard')  # Replace with your student dashboard
+                return redirect('/home')  # Replace with your student dashboard
             else:
                 messages.error(request, 'Invalid credentials or you are not registered as a student.')
     else:
@@ -71,7 +71,7 @@ def alum_login(request):
             user = authenticate(request, username=username, password=password)
             if user is not None and hasattr(user, 'alumni'):
                 login(request, user)
-                return redirect('alumni_dashboard')  # Replace with your alumni dashboard
+                return redirect('/home')  # Replace with your alumni dashboard
             else:
                 messages.error(request, 'Invalid credentials or you are not registered as alumni.')
     else:

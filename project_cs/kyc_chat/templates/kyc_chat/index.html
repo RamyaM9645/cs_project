@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}AI Company Info{% endblock title %}
+{% block head %}
+{% endblock head %}
+
+{% block content %}
+<center>
+    <div class="chat-container">
+        <h1>Know Your Company: AI Chat Bot</h1>
+        <div class="chat-box" id="chat-box">
+            <!-- Messages will appear here -->
+        </div>
+        
+        <form method="post">
+            {% csrf_token %}
+            <label for="query">Enter your query:</label>&nbsp;
+            <input type="text" id="query" name="query" required>
+            <input type="submit" value="Submit">
+        </form>
+        {% if response_text %}
+            <h2>Response:</h2>
+            <p>{{ response_text }}</p>
+        {% endif %}
+    </div>    
+</center>
+
+{% endblock content %}

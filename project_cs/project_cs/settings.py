@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user',
-    'authen'
+    'authen',
+    'home',
+    'kyc_chat'
 ]
 
 MIDDLEWARE = [
