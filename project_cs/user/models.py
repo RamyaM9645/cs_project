@@ -47,3 +47,50 @@ class Alumni(models.Model):
 
     def __str__(self):
         return f'{self.user.first_name} {self.user.last_name} - Alumni'
+
+class CompanyDetails(models.Model):
+    company_id = models.AutoField(primary_key=True)  # Primary Key for the company
+    company_name = models.CharField(max_length=255, unique=True)  # Unique company name
+    headquarters = models.CharField(max_length=255, blank=True, null=True)
+    founded = models.IntegerField(blank=True, null=True)
+    industry = models.CharField(max_length=255, blank=True, null=True)
+    core_products_services = models.TextField(blank=True, null=True)
+    company_size = models.CharField(max_length=50, blank=True, null=True)
+    recruitment_process = models.TextField(blank=True, null=True)
+    common_roles = models.TextField(blank=True, null=True)
+    global_presence = models.BooleanField(default=False)
+    college_visited = models.BooleanField(default=False)
+    profile_picture = models.ImageField(upload_to='company_profiles/', blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.company_name
+    
+
+class SuccessStory(models.Model):
+    story_id = models.AutoField(primary_key=True)  # Primary Key for the story
+    alumni = models.ForeignKey(Alumni, on_delete=models.CASCADE)  # Foreign Key to Alumni
+    company = models.ForeignKey(CompanyDetails, on_delete=models.CASCADE)  # Foreign Key to Company
+    story_title = models.CharField(max_length=255)  # Title of the success story
+    story_content = models.TextField()  # Content of the success story
+    image_url = models.URLField(blank=True, null=True)  # Optional image URL
+    created_at = models.DateTimeField(auto_now_add=True)  # Automatically set on creation
+    updated_at = models.DateTimeField(auto_now=True)  # Automatically update on modification
+
+    def __str__(self):
+        return self.story_title
+    
+class CompanyReview(models.Model):
+    review_id = models.AutoField(primary_key=True)  # Primary Key for each review
+    company = models.ForeignKey(CompanyDetails, on_delete=models.CASCADE, related_name='company_reviews')  # Foreign Key to CompanyDetails
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Foreign Key to User
+    review_title = models.CharField(max_length=255)  # Title of the review
+    profile_picture = models.ImageField(upload_to='review_profiles/', blank=True, null=True)  # Optional profile picture
+    review_content = models.TextField()  # Content of the review
+    rating = models.DecimalField(max_digits=2, decimal_places=1)  # Rating (e.g., 4.5)
+    created_at = models.DateTimeField(auto_now_add=True)  # Automatically set on creation
+    updated_at = models.DateTimeField(auto_now=True)  # Automatically updated on modification
+
+    def __str__(self):
+        return f"{self.review_title} - {self.company.company_name}"

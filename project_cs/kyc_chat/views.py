@@ -3,7 +3,7 @@ from django.shortcuts import render
 from groq import Groq
 import json
 
-API_KEY = config('API_KEY', default='')
+API_KEY = config('AI_API_KEY', default='')
 
 def index(request):
     # Initialize Groq API client

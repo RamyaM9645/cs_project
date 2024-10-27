@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'user',
     'authen',
     'home',
-    'kyc_chat'
+    'kyc_chat',
+    'news',
+    'experiences'
 ]
 
 MIDDLEWARE = [
