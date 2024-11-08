@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'home',
     'kyc_chat',
     'news',
-    'experiences'
+    'experiences',
+    'success_stories'
 ]
 
 MIDDLEWARE = [

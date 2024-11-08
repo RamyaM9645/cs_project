@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Success Stories</h1>
+    <ul>
+        {% for story in stories %}
+            <li>
+                <a href="{% url 'success_stories:success_story_detail' story.story_id %}">
+                    {{ story.story_title }}
+                </a> - {{ story.created_at }}
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'success_stories:success_story_create' %}">Add New Story</a>
+{% endblock %}
