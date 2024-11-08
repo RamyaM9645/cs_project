@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Register</h2>
+<form method="post" action="">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="username" class="form-label">Username:</label>
+        <input type="text" name="username" id="username" class="form-control" value="{{ form.username.value|default:'' }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" name="email" id="email" class="form-control" value="{{ form.email.value|default:'' }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="password1" class="form-label">Password:</label>
+        <input type="password" name="password1" id="password1" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="password2" class="form-label">Confirm Password:</label>
+        <input type="password" name="password2" id="password2" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="graduation_year" class="form-label">Graduation Year:</label>
+        <input type="number" name="graduation_year" id="graduation_year" class="form-control" value="{{ form.graduation_year.value|default:'' }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="current_company" class="form-label">Current Company:</label>
+        <input type="text" name="current_company" id="current_company" class="form-control" value="{{ form.current_company.value|default:'' }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="current_position" class="form-label">Current Position:</label>
+        <input type="text" name="current_position" id="current_position" class="form-control" value="{{ form.current_position.value|default:'' }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="linkedIn_profile" class="form-label">LinkedIn Profile:</label>
+        <input type="url" name="linkedIn_profile" id="linkedIn_profile" class="form-control" value="{{ form.linkedIn_profile.value|default:'' }}">
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+{% endblock %}
