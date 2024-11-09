@@ -19,6 +19,15 @@
     <a href="">Company Library</a>
     
     <a href="{% url "home3:success_story_list" %}">Success Stories</a>
+    {% if request.session.role_type %}
+        <div class="mt-5 alert alert-info">
+            <strong>User Type:</strong> {{ request.session.role_type }}
+        </div>
+    {% else %}
+        <div class="mt-5 alert alert-warning">
+            User Type session variable not set.
+        </div>
+    {% endif %}
 
 </center>
 

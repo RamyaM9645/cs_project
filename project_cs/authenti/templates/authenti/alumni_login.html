@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Alumni Login{% endblock %}
 
 {% block content %}
-<h2 class="mb-4">Login</h2>
-<form method="post" action="{% url 'login' %}">
+<h2 class="mb-4">Alumni Login</h2>
+<form method="post" action="/alumni/login/">
     {% csrf_token %}
     <div class="mb-3">
         <label for="username" class="form-label">Username:</label>
@@ -16,10 +16,5 @@
     </div>
     <button type="submit" class="btn btn-primary mb-3">Login</button>
 </form>
-
-<!-- Buttons to register as Student or Alumni -->
-<div class="d-flex gap-2">
-    <a href="{% url "student_register" %}" class="btn btn-secondary">Register as Student</a>
-    <a href="{% url 'alumni_register' %}" class="btn btn-secondary">Register as Alumni</a>
-</div>
+<a href="/alumni/register/" class="btn btn-secondary">Register as Alumni</a>
 {% endblock %}
