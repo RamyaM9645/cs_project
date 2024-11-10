@@ -1,12 +1,11 @@
 from django.db import models
-
-from django.db import models
+from django.conf import settings  # Import settings to use the custom User model
 
 class CompanyDetails(models.Model):
-    company_id = models.AutoField(primary_key=True)  # Primary Key for the company
-    company_name = models.CharField(max_length=255, unique=True)  # Unique company name
+    company_id = models.AutoField(primary_key=True)
+    company_name = models.CharField(max_length=255, unique=True)
     headquarters = models.CharField(max_length=255, blank=True, null=True)
-    country = models.CharField(max_length=255, blank=True, null=True)  # Add Country field here
+    country = models.CharField(max_length=255, blank=True, null=True)
     founded = models.IntegerField(blank=True, null=True)
     industry = models.CharField(max_length=255, blank=True, null=True)
     core_products_services = models.TextField(blank=True, null=True)
@@ -22,15 +21,16 @@ class CompanyDetails(models.Model):
     def __str__(self):
         return self.company_name
 
+
 class CompanyReview(models.Model):
-    review_id = models.AutoField(primary_key=True)  # Primary Key for each review
-    company = models.IntegerField(null=True, blank=True) # models.ForeignKey(CompanyDetails, on_delete=models.CASCADE, related_name='company_reviews')  # Foreign Key to CompanyDetails
-    user = models.IntegerField(null=True, blank=True) # models.ForeignKey(User, on_delete=models.CASCADE)  # Foreign Key to User
-    review_title = models.CharField(max_length=255)  # Title of the review
-    review_content = models.TextField()  # Content of the review
-    rating = models.DecimalField(max_digits=2, decimal_places=1)  # Rating (e.g., 4.5)
-    created_at = models.DateTimeField(auto_now_add=True)  # Automatically set on creation
-    updated_at = models.DateTimeField(auto_now=True)  # Automatically updated on modification
+    review_id = models.AutoField(primary_key=True)
+    company = models.ForeignKey(CompanyDetails, on_delete=models.CASCADE, related_name='reviews')   # Link to CompanyDetails
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)  # Link to the User model
+    review_title = models.CharField(max_length=255)
+    review_content = models.TextField()
+    rating = models.DecimalField(max_digits=2, decimal_places=1)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.review_title} - {self.company.company_name}"

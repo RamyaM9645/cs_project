@@ -47,6 +47,12 @@ def company_list(request):
 
     return render(request, 'company_lib/company_list.html', context)
 
+
 def company_detail(request, company_id):
-    company = get_object_or_404(CompanyDetails, pk=company_id)
-    return render(request, 'company_lib/company_detail.html', {'company': company})
+    company = get_object_or_404(CompanyDetails, company_id=company_id)
+    reviews = company.reviews.all()  # Fetch all reviews for the company
+    context = {
+        'company': company,
+        'reviews': reviews,
+    }
+    return render(request, 'company_lib/company_detail.html', context)

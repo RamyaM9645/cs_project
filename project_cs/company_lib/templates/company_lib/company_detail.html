@@ -16,17 +16,24 @@
 <p><strong>College Visited:</strong> {{ company.college_visited|yesno:"Yes,No" }}</p>
 
 {% if company.profile_picture %}
-    <div>
-        <h4>Profile Picture</h4>
-        <img src="{{ company.profile_picture.url }}" alt="{{ company.company_name }} Profile Picture" style="max-width: 300px; height: auto; border-radius: 8px;">
-    </div>
-{% else %}
-    <p><em>No profile picture available.</em></p>
+    <img src="{{ company.profile_picture.url }}" alt="{{ company.company_name }} Profile Picture">
 {% endif %}
 
-<!-- Last Updated Tag -->
-<p><strong>Last Updated:</strong> {{ company.updated_at|date:"F j, Y, g:i a" }}</p>
+<h3>Reviews</h3>
+{% if reviews %}
+    <ul>
+        {% for review in reviews %}
+            <li>
+                <strong>{{ review.review_title }}</strong> by {{ review.user.username }}<br>
+                <em>Rating: {{ review.rating }}/5</em><br>
+                <p>{{ review.review_content }}</p>
+                <p><small>Last updated: {{ review.updated_at }}</small></p>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No reviews yet for this company.</p>
+{% endif %}
 
-<!-- Direct link to company list without namespace -->
 <a href="/home/company_lib/">Back to Company List</a>
 {% endblock %}
