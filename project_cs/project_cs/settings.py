@@ -40,10 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'user',
     'authen',
+    'authenti',
     'home',
     'kyc_chat',
     'news',
-    'experiences'
+    'experiences',
+    'success_stories'
 ]
 
 MIDDLEWARE = [

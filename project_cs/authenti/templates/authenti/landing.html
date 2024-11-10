@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <h2>Welcome to Our Platform</h2>
+    
+    
+    <p>Please select an option below:</p>
+    <div class="d-flex justify-content-center gap-3 mt-4">
+        <a href="/student/register/" class="btn btn-primary">Register as Student</a>
+        <a href="/alumni/register/" class="btn btn-primary">Register as Alumni</a>
+        <a href="/student/login/" class="btn btn-secondary">Student Login</a>
+        <a href="/alumni/login/" class="btn btn-secondary">Alumni Login</a>
+    </div>
+</div>
+{% endblock %}

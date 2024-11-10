@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Register as Student</h2>
+<form method="post" action="{% url 'student_register' %}">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="username" class="form-label">Username:</label>
+        <input type="text" name="username" id="username" class="form-control" value="{{ form.username.value|default:'' }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" name="email" id="email" class="form-control" value="{{ form.email.value|default:'' }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="password1" class="form-label">Password:</label>
+        <input type="password" name="password1" id="password1" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="password2" class="form-label">Confirm Password:</label>
+        <input type="password" name="password2" id="password2" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="admission_no" class="form-label">Admission Number:</label>
+        <input type="text" name="admission_no" id="admission_no" class="form-control" value="{{ form.admission_no.value|default:'' }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="enrollment_year" class="form-label">Enrollment Year:</label>
+        <input type="number" name="enrollment_year" id="enrollment_year" class="form-control" value="{{ form.enrollment_year.value|default:'' }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="current_year" class="form-label">Current Year:</label>
+        <input type="number" name="current_year" id="current_year" class="form-control" value="{{ form.current_year.value|default:'' }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="expected_graduation_year" class="form-label">Expected Graduation Year:</label>
+        <input type="number" name="expected_graduation_year" id="expected_graduation_year" class="form-control" value="{{ form.expected_graduation_year.value|default:'' }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="student_year" class="form-label">Student Year:</label>
+        <select name="student_year" id="student_year" class="form-select" required>
+            {% comment %} <option value="">Select Year</option> {% endcomment %}
+            <option value="First Year">First Year</option>
+            <option value="Final Year">Final Year</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+{% endblock %}
