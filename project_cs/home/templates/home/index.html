@@ -25,7 +25,7 @@
     </nav>
 
     <!-- Role Type Display -->
-    <div class="text-center mt-5">
+    {% comment %} <div class="text-center mt-5">
         {% if request.session.role_type %}
             <div class="alert alert-info">
                 <strong>User Type:</strong> {{ request.session.role_type }}
@@ -35,6 +35,6 @@
                 User Type session variable not set.
             </div>
         {% endif %}
-    </div>
+    </div> {% endcomment %}
 </div>
 {% endblock content %}

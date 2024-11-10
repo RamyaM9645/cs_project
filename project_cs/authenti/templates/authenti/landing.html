@@ -1,41 +1,33 @@
-{% extends 'base.html' %}
-
-{% comment %} {% block title %}Home{% endblock %}
-
-{% block content %}
-<div class="container text-center mt-5">
-    <h2>Welcome to Our Platform</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <!-- Include Bootstrap CSS for styling -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     
-    
-    <p>Please select an option below:</p>
-    <div class="d-flex justify-content-center gap-3 mt-4">
-        <a href="/student/register/" class="btn btn-primary">Register as Student</a>
-        <a href="/alumni/register/" class="btn btn-primary">Register as Alumni</a>
-        <a href="/student/login/" class="btn btn-secondary">Student Login</a>
-        <a href="/alumni/login/" class="btn btn-secondary">Alumni Login</a>
-    </div>
-</div>
-{% endblock %}  {% endcomment %}
+</head>
+<body>
+    <!-- Main Content -->
+    <div class="container-fluid text-center">
+        <div class="overlay">
+            <h2 class="display-4 font-weight-bold mb-3">Welcome To Placement Networking System</h2>
+            <p class="lead mb-4">Connecting students and alumni for a brighter future</p>
+            <p class="mb-4">Please select an option below:</p>
 
-
-{% block title %}Home{% endblock %}
-
-{% block content %}
-<div class="container-fluid text-center">
-    <div class="overlay">
-        <h2 class="display-4 font-weight-bold mb-3">Welcome To Placement Networking System</h2>
-        <p class="lead mb-4">Connecting students and alumni for a brighter future</p>
-        <p class="mb-4">Please select an option below:</p>
-        
-        <div class="d-flex justify-content-center gap-3 mt-4">
-            <a href="/student/register/" class="btn btn-primary btn-lg px-4 text-decoration-none">Register as Student</a>
-            <a href="/alumni/register/" class="btn btn-primary btn-lg px-4 text-decoration-none">Register as Alumni</a>
-            <a href="/student/login/" class="btn btn-secondary btn-lg px-4 text-decoration-none">Student Login</a>
-            <a href="/alumni/login/" class="btn btn-secondary btn-lg px-4 text-decoration-none">Alumni Login</a>
+            <div class="d-flex justify-content-center gap-3 mt-4">
+                <a href="/student/register/" class="btn btn-primary btn-lg px-4">Register as Student</a>
+                <a href="/alumni/register/" class="btn btn-primary btn-lg px-4">Register as Alumni</a>
+                <a href="/student/login/" class="btn btn-secondary btn-lg px-4">Student Login</a>
+                <a href="/alumni/login/" class="btn btn-secondary btn-lg px-4">Alumni Login</a>
+            </div>
         </div>
     </div>
-</div>
-{% endblock %}
 
-
-
+    <!-- Include Bootstrap JS for functionality -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

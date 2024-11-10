@@ -20,7 +20,7 @@ def success_story_list(request):
     # Check if the user has a related StudentUser record and if they are a first-year student
     is_first_year = (
         hasattr(request.user, 'studentuser') and 
-        request.user.studentuser.current_year == 1
+        request.user.studentuser.role_type == "First Year"
     ) if request.user.is_authenticated else False
     
     stories = SuccessStory.objects.all()
@@ -43,3 +43,11 @@ def success_story_create(request):
     else:
         form = SuccessStoryForm()
     return render(request, 'success_stories/success_story_form.html', {'form': form})
+
+from django.shortcuts import redirect
+from django.contrib.auth import logout
+
+def logout_view(request):
+    """Logs the user out and redirects to the homepage or login page."""
+    logout(request)  # Log out the user
+    return redirect('home')  # Redirect to home page or any other page after logout
