@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Company List{% endblock %}
+
+{% block content %}
+<h2>Company List</h2>
+
+<!-- Search Form -->
+<form method="get">
+    <div>
+        <label for="search">Search by Company Name:</label>
+        <input type="text" name="search" id="search" value="{{ search_query }}" placeholder="Enter company name">
+    </div>
+
+    <!-- Filter Section -->
+    <div>
+        <label for="country">Filter by Country:</label>
+        <select name="country" id="country">
+            <option value="">All Country</option>
+            {% for country in distinct_countries %}
+                <option value="{{ country }}" {% if request.GET.country == country %}selected{% endif %}>{{ country }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div>
+        <label for="year">Filter by Year of Founding:</label>
+        <select name="year" id="year">
+            <option value="">All Year Range</option>
+            {% for year_range in year_ranges %}
+                <option value="{{ year_range }}" {% if request.GET.year == year_range %}selected{% endif %}>{{ year_range }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div>
+        <label for="cet_visited">Filter by CET Visited:</label>
+        <select name="cet_visited" id="cet_visited">
+            <option value="">All Companies</option>
+            <option value="True" {% if request.GET.cet_visited == 'True' %}selected{% endif %}>CET Visited</option>
+            <option value="False" {% if request.GET.cet_visited == 'False' %}selected{% endif %}>Not Visited</option>
+        </select>
+    </div>
+
+    <button type="submit">Filter</button>
+</form>
+
+<!-- Company List -->
+<ul>
+    {% for company in companies %}
+        <li>
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                {% if company.profile_picture %}
+                    <img src="{{ company.profile_picture.url }}" alt="{{ company.company_name }} Profile Picture" style="width: 50px; height: 50px; border-radius: 25px; margin-right: 10px;">
+                {% else %}
+                    <img src="" alt="Default Profile Picture" style="width: 50px; height: 50px; border-radius: 25px; margin-right: 10px;">
+                {% endif %}
+
+                <a href="/home/company_lib/company/{{ company.company_id }}/">{{ company.company_name }}</a>
+
+                {% if company.college_visited %}
+                    <span style="margin-left: 10px; color: green; font-weight: bold;">CET Visited</span>
+                {% else %}
+                    <span style="margin-left: 10px; color: gray;">Not Visited</span>
+                {% endif %}
+            </div>
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

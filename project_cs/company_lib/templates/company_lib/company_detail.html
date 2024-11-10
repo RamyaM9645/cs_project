@@ -1,0 +1,32 @@
+<!-- company_lib/templates/company_lib/company_detail.html -->
+{% extends 'base.html' %}
+
+{% block title %}{{ company.company_name }}{% endblock %}
+
+{% block content %}
+<h2>{{ company.company_name }}</h2>
+<p><strong>Headquarters:</strong> {{ company.headquarters }}</p>
+<p><strong>Founded:</strong> {{ company.founded }}</p>
+<p><strong>Industry:</strong> {{ company.industry }}</p>
+<p><strong>Core Products/Services:</strong> {{ company.core_products_services }}</p>
+<p><strong>Company Size:</strong> {{ company.company_size }}</p>
+<p><strong>Recruitment Process:</strong> {{ company.recruitment_process }}</p>
+<p><strong>Common Roles:</strong> {{ company.common_roles }}</p>
+<p><strong>Global Presence:</strong> {{ company.global_presence|yesno:"Yes,No" }}</p>
+<p><strong>College Visited:</strong> {{ company.college_visited|yesno:"Yes,No" }}</p>
+
+{% if company.profile_picture %}
+    <div>
+        <h4>Profile Picture</h4>
+        <img src="{{ company.profile_picture.url }}" alt="{{ company.company_name }} Profile Picture" style="max-width: 300px; height: auto; border-radius: 8px;">
+    </div>
+{% else %}
+    <p><em>No profile picture available.</em></p>
+{% endif %}
+
+<!-- Last Updated Tag -->
+<p><strong>Last Updated:</strong> {{ company.updated_at|date:"F j, Y, g:i a" }}</p>
+
+<!-- Direct link to company list without namespace -->
+<a href="/home/company_lib/">Back to Company List</a>
+{% endblock %}
