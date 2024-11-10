@@ -133,7 +133,7 @@ def student_login_view(request):
                 student_user = StudentUser.objects.get(user=user)
                 print(f"Session before setting role: {student_user.role_type}")  # Debug print
                 request.session['role_type'] = student_user.role_type
-                request.session.modified = True
+                request.session.save()
                 print(f"Session after setting role: {request.session.items()}") 
             except StudentUser.DoesNotExist:
                 messages.error(request, "This account does not have a Student profile.")

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Home{% endblock %}
+{% comment %} {% block title %}Home{% endblock %}
 
 {% block content %}
 <div class="container text-center mt-5">
@@ -15,4 +15,27 @@
         <a href="/alumni/login/" class="btn btn-secondary">Alumni Login</a>
     </div>
 </div>
+{% endblock %}  {% endcomment %}
+
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container-fluid text-center">
+    <div class="overlay">
+        <h2 class="display-4 font-weight-bold mb-3">Welcome To Placement Networking System</h2>
+        <p class="lead mb-4">Connecting students and alumni for a brighter future</p>
+        <p class="mb-4">Please select an option below:</p>
+        
+        <div class="d-flex justify-content-center gap-3 mt-4">
+            <a href="/student/register/" class="btn btn-primary btn-lg px-4 text-decoration-none">Register as Student</a>
+            <a href="/alumni/register/" class="btn btn-primary btn-lg px-4 text-decoration-none">Register as Alumni</a>
+            <a href="/student/login/" class="btn btn-secondary btn-lg px-4 text-decoration-none">Student Login</a>
+            <a href="/alumni/login/" class="btn btn-secondary btn-lg px-4 text-decoration-none">Alumni Login</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
+
+
+

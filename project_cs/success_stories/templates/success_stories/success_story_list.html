@@ -10,5 +10,7 @@
             </li>
         {% endfor %}
     </ul>
-    <a href="{% url 'success_stories:success_story_create' %}">Add New Story</a>
+    {% if not is_first_year %}
+        <a href="{% url 'success_stories:success_story_create' %}">Add New Story</a>
+    {% endif %}
 {% endblock %}

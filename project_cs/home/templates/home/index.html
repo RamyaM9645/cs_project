@@ -1,34 +1,40 @@
 {% extends "base.html" %}
 
 {% block head %}
-<title>CareerSphere : Placement Insights</title>
+<title>CareerSphere: Placement Insights</title>
 {% endblock head %}
 
 {% block content %}
+<div class="container mt-4">
+    <div class="text-center mb-4">
+        <h1>Welcome to CareerSphere: Placement Insights</h1>
+        <h3>Explore the opportunities...</h3>
+    </div>
 
-<center>
-    <h1>Welcome to CareerSphere : Placements Insights</h1><br>
-    <h3>Explore the opportunites..</h3>
-
-    <a href="{% url "home2:news" %}">Tech News</a>
-    
-    <a href="{% url "home1:kyc_chat" %}">Know Your Company</a>
-    
-    <a href="">Company Jargon Dictionary</a><br>
-    
-    <a href="">Company Library</a>
-    
-    <a href="{% url "home3:success_story_list" %}">Success Stories</a>
-    {% if request.session.role_type %}
-        <div class="mt-5 alert alert-info">
-            <strong>User Type:</strong> {{ request.session.role_type }}
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
+        <div class="container-fluid justify-content-center">
+            <div class="navbar-nav">
+                <a class="nav-link btn btn-outline-primary mx-2" href="{% url 'home2:news' %}">Tech News</a>
+                <a class="nav-link btn btn-outline-primary mx-2" href="{% url 'home1:kyc_chat' %}">Know Your Company</a>
+                <a class="nav-link btn btn-outline-primary mx-2" href="#">Company Jargon Dictionary</a>
+                <a class="nav-link btn btn-outline-primary mx-2" href="#">Company Library</a>
+                <a class="nav-link btn btn-outline-primary mx-2" href="{% url 'home3:success_story_list' %}">Success Stories</a>
+            </div>
         </div>
-    {% else %}
-        <div class="mt-5 alert alert-warning">
-            User Type session variable not set.
-        </div>
-    {% endif %}
+    </nav>
 
-</center>
-
+    <!-- Role Type Display -->
+    <div class="text-center mt-5">
+        {% if request.session.role_type %}
+            <div class="alert alert-info">
+                <strong>User Type:</strong> {{ request.session.role_type }}
+            </div>
+        {% else %}
+            <div class="alert alert-warning">
+                User Type session variable not set.
+            </div>
+        {% endif %}
+    </div>
+</div>
 {% endblock content %}
