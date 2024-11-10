@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Alumni Login{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Alumni Login</h2>
+<form method="post" action="/alumni/login/">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="username" class="form-label">Username:</label>
+        <input type="text" name="username" id="username" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Password:</label>
+        <input type="password" name="password" id="password" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary mb-3">Login</button>
+</form>
+<a href="/alumni/register/" class="btn btn-secondary">Register as Alumni</a>
+{% endblock %}
