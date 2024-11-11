@@ -1,10 +1,11 @@
 {% extends "base.html" %}
+
 {% block content %}
     <h2>{{ story.story_title }}</h2>
     <p>{{ story.story_content }}</p>
     <p><strong>Posted on:</strong> {{ story.created_at }}</p>
-    {% if story.image_url %}
-        <img src="{{ story.image_url }}" alt="Story Image">
+    {% if story.image.url %}
+        <img src="{{ story.image.url }}" alt="Story Image">
     {% endif %}
-    <a href="{% url 'success_stories:success_story_list' %}">Back to Stories</a>
+    <a href="/home/success_stories/">Back to Stories</a>
 {% endblock %}

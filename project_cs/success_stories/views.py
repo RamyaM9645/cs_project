@@ -1,21 +1,9 @@
-from django.shortcuts import render
-
-# Create your views here.
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import SuccessStory
-from .forms import SuccessStoryForm  # Form to create or edit stories (defined below)
-
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 # View to list all success stories
-# def success_story_list(request):
-#     stories = SuccessStory.objects.filter(visibility=True).order_by('-created_at')
-#     return render(request, 'success_stories/success_story_list.html', {'stories': stories})
-
-# def success_story_list(request):
-#     # Assume `user_year` is a field on the user model or obtained through user profile
-#     is_first_year = request.user.role_type == 'First Year' if request.user.is_authenticated else False
-#     stories = SuccessStory.objects.all()
-#     return render(request, 'success_stories/success_story_list.html', {'stories': stories, 'is_first_year': is_first_year})
-
+@login_required
 def success_story_list(request):
     # Check if the user has a related StudentUser record and if they are a first-year student
     is_first_year = (
@@ -23,31 +11,42 @@ def success_story_list(request):
         request.user.studentuser.role_type == "First Year"
     ) if request.user.is_authenticated else False
     
+    # Fetch all success stories
     stories = SuccessStory.objects.all()
     return render(request, 'success_stories/success_story_list.html', {'stories': stories, 'is_first_year': is_first_year})
 
-
-
-# View to display details of a single story
-def success_story_detail(request, pk):
-    story = SuccessStory.objects.get(pk=pk)
+def success_story_detail(request, story_id):
+    story = get_object_or_404(SuccessStory, pk=story_id)  # Use story_id here
     return render(request, 'success_stories/success_story_detail.html', {'story': story})
 
-# View to create a new success story
-def success_story_create(request):
-    if request.method == 'POST':
-        form = SuccessStoryForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('success_stories:success_story_list')
-    else:
-        form = SuccessStoryForm()
-    return render(request, 'success_stories/success_story_form.html', {'form': form})
-
-from django.shortcuts import redirect
-from django.contrib.auth import logout
-
+# View for logging out
 def logout_view(request):
     """Logs the user out and redirects to the homepage or login page."""
     logout(request)  # Log out the user
     return redirect('home')  # Redirect to home page or any other page after logout
+
+# View for adding a new success story
+def add_success_story(request):
+    if request.method == 'POST':
+        # Collect data from the form
+        story_title = request.POST.get('story_title')
+        story_content = request.POST.get('story_content')
+        image = request.FILES.get('image')
+        username = request.user.username
+        print(f"session role : {request.session['role_type']}")
+        user_role = request.session['role_type']
+         # Handle image upload
+        
+        # Create the new success story
+        story = SuccessStory.objects.create(
+            story_title=story_title,
+            story_content=story_content,
+            image=image,
+            username=username,
+            user_role=user_role
+        )
+        story.save()
+        # Redirect after saving the new story
+        return redirect('/home/success_stories/')  # Ensure this matches your URL path
+    
+    return render(request, 'success_stories/success_story_form.html')  # Show the form if not a POST request

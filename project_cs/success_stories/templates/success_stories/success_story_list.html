@@ -1,16 +1,20 @@
 {% extends "base.html" %}
+
 {% block content %}
     <h1>Success Stories</h1>
     <ul>
         {% for story in stories %}
             <li>
-                <a href="{% url 'success_stories:success_story_detail' story.story_id %}">
+                <a href="/home/success_stories/{{ story.story_id }}/">  <!-- Direct URL path -->
                     {{ story.story_title }}
-                </a> - {{ story.created_at }}
+                </a> - {{ story.updated_at }} - posted by {{ story.username }} - {{story.user_role}}
             </li>
         {% endfor %}
     </ul>
+    
     {% if not is_first_year %}
-        <a href="{% url 'success_stories:success_story_create' %}">Add New Story</a>
+        <a href="add/">  <!-- Direct URL path for adding a new story -->
+            Add New Story
+        </a>
     {% endif %}
 {% endblock %}

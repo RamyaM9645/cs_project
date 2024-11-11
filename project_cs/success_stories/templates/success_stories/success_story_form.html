@@ -1,9 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
     <h2>Add Success Story</h2>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
+        
+        <!-- Title Field -->
+        <label for="id_story_title">Story Title:</label>
+        <input type="text" name="story_title" id="id_story_title" value="{{ form.story_title.value|default_if_none:'' }}">
+        <br>
+        
+        <!-- Content Field -->
+        <label for="id_story_content">Story Content:</label>
+        <textarea name="story_content" id="id_story_content">{{ form.story_content.value|default_if_none:'' }}</textarea>
+        <br>
+        
+        <!-- Image Upload Field -->
+        <label for="id_image">Upload Image:</label>
+        <input type="file" name="image" id="id_image">
+        <br>
+        
+        <!-- Submit Button -->
         <button type="submit">Save Story</button>
     </form>
 {% endblock %}
