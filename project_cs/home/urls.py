@@ -8,4 +8,5 @@ urlpatterns = [
     path('news',include(('news.urls','news'),namespace='home2')),
     path('success_stories',include(('success_stories.urls','success_stories'),namespace='home3')),
     path('company_lib/', include('company_lib.urls')), 
+    path('corporate_dict/', include('corporate_dict.urls')), 
 ]

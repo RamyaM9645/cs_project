@@ -1,0 +1,50 @@
+<!-- corporate_dict/templates/corporate_dict/corporate_dict_page.html -->
+{% extends 'base.html' %}
+
+{% block title %}Corporate Dictionary{% endblock %}
+
+{% block content %}
+<h2>Corporate Dictionary</h2>
+
+<!-- Today's Word section -->
+<div>
+    <h3>{{ todays_word_phrase }} <strong>{{ todays_word.word }}</strong></h3>
+    <p>{{ todays_word.definition }}</p>
+</div>
+
+<!-- Back to Home button -->
+<div>
+    <a href="/home/" class="btn btn-secondary">Back to Home</a>
+</div>
+
+<!-- Alphabet Filter Form -->
+<form method="get" class="mt-3">
+    <label for="alphabet">Filter by Alphabet Range:</label>
+    <select name="alphabet" id="alphabet">
+        <option value="">All Words</option>
+        <option value="A-E" {% if request.GET.alphabet == "A-E" %}selected{% endif %}>A-E</option>
+        <option value="F-J" {% if request.GET.alphabet == "F-J" %}selected{% endif %}>F-J</option>
+        <option value="K-O" {% if request.GET.alphabet == "K-O" %}selected{% endif %}>K-O</option>
+        <option value="P-T" {% if request.GET.alphabet == "P-T" %}selected{% endif %}>P-T</option>
+        <option value="U-Z" {% if request.GET.alphabet == "U-Z" %}selected{% endif %}>U-Z</option>
+    </select>
+
+    <label for="sort">Sort Order:</label>
+    <select name="sort" id="sort">
+        <option value="asc" {% if request.GET.sort == "asc" %}selected{% endif %}>Sort A-Z</option>
+        <option value="desc" {% if request.GET.sort == "desc" %}selected{% endif %}>Sort Z-A</option>
+    </select>
+
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+
+<!-- Corporate Terms List -->
+<ul class="mt-4">
+    {% for term in terms %}
+        <li>
+            <strong>{{ term.word }}</strong><br>
+            <p>{{ term.definition }}</p>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'news',
     'experiences',
     'success_stories',
-    'company_lib'
+    'company_lib',
+    'corporate_dict'
 ]
 
 MIDDLEWARE = [
