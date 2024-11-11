@@ -3,69 +3,83 @@
 {% block title %}Company List{% endblock %}
 
 {% block content %}
-<h2>Company List</h2>
+<div class="container mx-auto p-6">
+    <!-- Company List Heading with Same Style as "Welcome to CareerSphere" -->
+    <h2 class="text-4xl font-extrabold text-gray-800 mb-6 text-center">Company Library</h2>
 
-<!-- Search Form -->
-<form method="get">
-    <div>
-        <label for="search">Search by Company Name:</label>
-        <input type="text" name="search" id="search" value="{{ search_query }}" placeholder="Enter company name">
-    </div>
-
-    <!-- Filter Section -->
-    <div>
-        <label for="country">Filter by Country:</label>
-        <select name="country" id="country">
-            <option value="">All Country</option>
-            {% for country in distinct_countries %}
-                <option value="{{ country }}" {% if request.GET.country == country %}selected{% endif %}>{{ country }}</option>
-            {% endfor %}
-        </select>
-    </div>
-
-    <div>
-        <label for="year">Filter by Year of Founding:</label>
-        <select name="year" id="year">
-            <option value="">All Year Range</option>
-            {% for year_range in year_ranges %}
-                <option value="{{ year_range }}" {% if request.GET.year == year_range %}selected{% endif %}>{{ year_range }}</option>
-            {% endfor %}
-        </select>
-    </div>
-
-    <div>
-        <label for="cet_visited">Filter by CET Visited:</label>
-        <select name="cet_visited" id="cet_visited">
-            <option value="">All Companies</option>
-            <option value="True" {% if request.GET.cet_visited == 'True' %}selected{% endif %}>CET Visited</option>
-            <option value="False" {% if request.GET.cet_visited == 'False' %}selected{% endif %}>Not Visited</option>
-        </select>
-    </div>
-
-    <button type="submit">Filter</button>
-</form>
-
-<!-- Company List -->
-<ul>
-    {% for company in companies %}
-        <li>
-            <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                {% if company.profile_picture %}
-                    <img src="{{ company.profile_picture.url }}" alt="{{ company.company_name }} Profile Picture" style="width: 50px; height: 50px; border-radius: 25px; margin-right: 10px;">
-                {% else %}
-                    <img src="" alt="Default Profile Picture" style="width: 50px; height: 50px; border-radius: 25px; margin-right: 10px;">
-                {% endif %}
-
-                <a href="/home/company_lib/company/{{ company.company_id }}/">{{ company.company_name }}</a>
-
-                {% if company.college_visited %}
-                    <span style="margin-left: 10px; color: green; font-weight: bold;">CET Visited</span>
-                {% else %}
-                    <span style="margin-left: 10px; color: gray;">Not Visited</span>
-                {% endif %}
+    <!-- Search and Filter Form -->
+    <form method="get" class="space-y-6 mb-8">
+        <div class="flex flex-col md:flex-row gap-4 items-center justify-center">
+            <div class="flex flex-col w-full sm:w-1/3 md:w-1/4">
+                <label for="search" class="font-medium text-gray-600">Search by Company Name:</label>
+                <input type="text" name="search" id="search" value="{{ search_query }}" placeholder="Enter company name" class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
             </div>
-        </li>
-    {% endfor %}
-</ul>
-<a href="/home/" class="btn btn-secondary">Back to Home</a>
+
+            <div class="flex flex-col w-full sm:w-1/3 md:w-1/4">
+                <label for="country" class="font-medium text-gray-600">Filter by Country:</label>
+                <select name="country" id="country" class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+                    <option value="">All Countries</option>
+                    {% for country in distinct_countries %}
+                        <option value="{{ country }}" {% if request.GET.country == country %}selected{% endif %}>{{ country }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="flex flex-col w-full sm:w-1/3 md:w-1/4">
+                <label for="year" class="font-medium text-gray-600">Filter by Year of Founding:</label>
+                <select name="year" id="year" class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+                    <option value="">All Year Range</option>
+                    {% for year_range in year_ranges %}
+                        <option value="{{ year_range }}" {% if request.GET.year == year_range %}selected{% endif %}>{{ year_range }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="flex flex-col w-full sm:w-1/3 md:w-1/4">
+                <label for="cet_visited" class="font-medium text-gray-600">Filter by CET Visited:</label>
+                <select name="cet_visited" id="cet_visited" class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+                    <option value="">All Companies</option>
+                    <option value="True" {% if request.GET.cet_visited == 'True' %}selected{% endif %}>CET Visited</option>
+                    <option value="False" {% if request.GET.cet_visited == 'False' %}selected{% endif %}>Not Visited</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="flex justify-center mt-6">
+            <button type="submit" class="px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition duration-200">
+                Apply Filters
+            </button>           
+        </div>
+    </form>
+
+    <!-- Company List (Cards Layout) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {% for company in companies %}
+        <div class="bg-white border border-gray-200 rounded-lg shadow-md p-6 hover:shadow-lg transition duration-200">
+            <div class="flex items-center mb-4">
+                {% if company.profile_picture %}
+                <img src="{{ company.profile_picture.url }}" alt="{{ company.company_name }} Profile Picture" class="w-16 h-16 rounded-full mr-4">
+                {% else %}
+                <img src="" alt="Default Profile Picture" class="w-16 h-16 rounded-full mr-4">
+                {% endif %}
+                <div>
+                    <a href="/home/company_lib/company/{{ company.company_id }}/" class="text-xl font-semibold text-blue-600 hover:underline">{{ company.company_name }}</a>
+                    {% if company.college_visited %}
+                    <span class="block text-sm text-green-600 font-medium mt-1">CET Visited</span>
+                    {% else %}
+                    <span class="block text-sm text-gray-500 mt-1">Not Visited</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Back to Home with Left Arrow Icon (Smaller Text Size) -->
+    <div class="absolute top-6 left-6">
+        <a href="/home/" class="text-gray-600 hover:text-blue-600 text-lg">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+    </div>
+</div>
 {% endblock %}

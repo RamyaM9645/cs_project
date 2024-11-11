@@ -1,50 +1,69 @@
-<!-- corporate_dict/templates/corporate_dict/corporate_dict_page.html -->
 {% extends 'base.html' %}
 
 {% block title %}Corporate Dictionary{% endblock %}
 
 {% block content %}
-<h2>Corporate Dictionary</h2>
 
-<!-- Today's Word section -->
-<div>
-    <h3>{{ todays_word_phrase }} <strong>{{ todays_word.word }}</strong></h3>
-    <p>{{ todays_word.definition }}</p>
+<!-- Tailwind CSS for styling -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Back to Home Arrow (top left corner) -->
+<div class="absolute top-4 left-4">
+    <a href="/home/" class="text-gray-500 hover:text-gray-700 text-lg">
+        <!-- Left Arrow Icon using Tailwind CSS's built-in class for arrows -->
+        <i class="fas fa-arrow-left"></i> Back to Home
+    </a>
 </div>
 
-<!-- Back to Home button -->
-<div>
-    <a href="/home/" class="btn btn-secondary">Back to Home</a>
+<!-- Centered Container -->
+<div class="container mx-auto p-6 max-w-5xl text-center">
+
+    <!-- Page Title -->
+    <h2 class="text-4xl font-bold text-gray-800 mb-6">Corporate Dictionary</h2>
+
+    <!-- Today's Word section -->
+    <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg mb-8 shadow-sm">
+        <h3 class="text-lg font-semibold text-blue-700">{{ todays_word_phrase }}: <strong>{{ todays_word.word }}</strong></h3>
+        <p class="text-gray-700 mt-2">{{ todays_word.definition }}</p>
+    </div>
+
+    <!-- Alphabet Filter Form -->
+    <form method="get" class="flex items-center justify-center space-x-4 mb-6">
+        <div>
+            <label for="alphabet" class="text-gray-700 font-medium mr-2">Filter by Alphabet Range:</label>
+            <select name="alphabet" id="alphabet" class="px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                <option value="">All Words</option>
+                <option value="A-E" {% if request.GET.alphabet == "A-E" %}selected{% endif %}>A-E</option>
+                <option value="F-J" {% if request.GET.alphabet == "F-J" %}selected{% endif %}>F-J</option>
+                <option value="K-O" {% if request.GET.alphabet == "K-O" %}selected{% endif %}>K-O</option>
+                <option value="P-T" {% if request.GET.alphabet == "P-T" %}selected{% endif %}>P-T</option>
+                <option value="U-Z" {% if request.GET.alphabet == "U-Z" %}selected{% endif %}>U-Z</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="sort" class="text-gray-700 font-medium mr-2">Sort Order:</label>
+            <select name="sort" id="sort" class="px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                <option value="asc" {% if request.GET.sort == "asc" %}selected{% endif %}>Sort A-Z</option>
+                <option value="desc" {% if request.GET.sort == "desc" %}selected{% endif %}>Sort Z-A</option>
+            </select>
+        </div>
+
+        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-200">Filter</button>
+    </form>
+
+    <!-- Corporate Terms List -->
+    <ul class="space-y-4">
+        {% for term in terms %}
+            <li class="flex items-start space-x-2 p-4 bg-white border border-blue-500 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-200">
+                <!-- Term (Key) -->
+                <h4 class="text-lg font-semibold text-gray-800">{{ term.word }}</h4><span>:</span>
+                <!-- Definition (Value) -->
+                <p class="text-gray-600">{{ term.definition }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+
 </div>
 
-<!-- Alphabet Filter Form -->
-<form method="get" class="mt-3">
-    <label for="alphabet">Filter by Alphabet Range:</label>
-    <select name="alphabet" id="alphabet">
-        <option value="">All Words</option>
-        <option value="A-E" {% if request.GET.alphabet == "A-E" %}selected{% endif %}>A-E</option>
-        <option value="F-J" {% if request.GET.alphabet == "F-J" %}selected{% endif %}>F-J</option>
-        <option value="K-O" {% if request.GET.alphabet == "K-O" %}selected{% endif %}>K-O</option>
-        <option value="P-T" {% if request.GET.alphabet == "P-T" %}selected{% endif %}>P-T</option>
-        <option value="U-Z" {% if request.GET.alphabet == "U-Z" %}selected{% endif %}>U-Z</option>
-    </select>
-
-    <label for="sort">Sort Order:</label>
-    <select name="sort" id="sort">
-        <option value="asc" {% if request.GET.sort == "asc" %}selected{% endif %}>Sort A-Z</option>
-        <option value="desc" {% if request.GET.sort == "desc" %}selected{% endif %}>Sort Z-A</option>
-    </select>
-
-    <button type="submit" class="btn btn-primary">Filter</button>
-</form>
-
-<!-- Corporate Terms List -->
-<ul class="mt-4">
-    {% for term in terms %}
-        <li>
-            <strong>{{ term.word }}</strong><br>
-            <p>{{ term.definition }}</p>
-        </li>
-    {% endfor %}
-</ul>
 {% endblock %}

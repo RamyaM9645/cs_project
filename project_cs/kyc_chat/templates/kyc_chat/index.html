@@ -1,29 +1,64 @@
 {% extends "base.html" %}
 
 {% block title %}AI Company Info{% endblock title %}
-{% block head %}
-{% endblock head %}
 
 {% block content %}
-<a href="/home/" class="btn btn-secondary">Back to Home</a>
-<center>
-    <div class="chat-container">
-        <h1>Know Your Company: AI Chat Bot</h1>
-        <div class="chat-box" id="chat-box">
-            <!-- Messages will appear here -->
-        </div>
-        
-        <form method="post">
+<!-- Back Button positioned at the top left -->
+<div class="absolute top-4 left-4">
+    <a href="/home/" class="flex items-center text-gray-600 hover:text-blue-600 text-sm">
+        <i class="fas fa-arrow-left mr-1"></i> Back to Home
+    </a>
+</div>
+
+<div class="flex justify-center items-center min-h-screen bg-gray-100">
+    <div class="bg-white shadow-lg rounded-lg p-8 max-w-2xl w-full">
+        <!-- Page Title -->
+        <h1 class="text-3xl font-bold text-center text-blue-600 mb-6">Know Your Company: AI Chat Bot</h1>
+
+        <!-- Query Form -->
+        <form method="post" class="flex flex-col items-center">
             {% csrf_token %}
-            <label for="query">Enter your query:</label>&nbsp;
-            <input type="text" id="query" name="query" required>
-            <input type="submit" value="Submit">
+            <label for="query" class="text-gray-600 font-semibold mb-2">Enter your query:</label>
+            <input 
+                type="text" 
+                id="query" 
+                name="query" 
+                required 
+                class="border border-gray-300 rounded-md px-4 py-2 w-full max-w-md focus:outline-none focus:ring focus:border-blue-300 mb-4"
+                placeholder="Type your question here..."
+            >
+            <input 
+                type="submit" 
+                value="Submit" 
+                class="bg-blue-600 text-white font-semibold rounded-full px-6 py-2 hover:bg-blue-700 transition duration-200 cursor-pointer"
+            >
         </form>
+
+        <!-- Response Section with Typing Animation -->
         {% if response_text %}
-            <h2>Response:</h2>
-            <p>{{ response_text }}</p>
+            <div class="mt-6">
+                <h2 class="text-xl font-semibold text-gray-700">Response:</h2>
+                <p id="response" class="text-gray-800 mt-2"></p> <!-- Empty at first for animation -->
+            </div>
+            
+            <!-- JavaScript for Typing Animation -->
+            <script>
+                const responseText = `{{ response_text }}`; // Your response text
+                const responseElement = document.getElementById("response");
+                let index = 0;
+
+                function typeEffect() {
+                    if (index < responseText.length) {
+                        responseElement.innerHTML += responseText.charAt(index);
+                        index++;
+                        setTimeout(typeEffect, 50); // Adjust speed here
+                    }
+                }
+                
+                // Start typing effect
+                typeEffect();
+            </script>
         {% endif %}
     </div>    
-</center>
-
+</div>
 {% endblock content %}

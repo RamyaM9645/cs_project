@@ -10,11 +10,11 @@ def corporate_dict_page(request):
     
     # List of fun introductory phrases for "Today's Word"
     fun_phrases = [
-        "Here's your buzzword of the day:",
-        "Get savvy with today's word:",
+        "Here's your buzzword of the day",
+        "Get savvy with today's word",
         "Corporate lingo spotlight!",
-        "Learn today's term:",
-        "Your word to impress:"
+        "Learn today's term",
+        "Your word to impress"
     ]
     
     # Choose a random phrase

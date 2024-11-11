@@ -5,30 +5,39 @@
 {% endblock head %}
 
 {% block content %}
+<!-- Main Container with Tailwind for Centered Layout and Spacing -->
+<div class="container mx-auto px-4 py-12 text-center">
+    <!-- Main Heading with Tailwind Font and Margin -->
+    <h1 class="text-4xl font-extrabold text-gray-800 mb-4">Welcome to CareerSphere: Placement Insights</h1>
+    <h3 class="text-xl text-gray-600 mb-8">Explore the opportunities...</h3>
 
-<center>
-    <h1>Welcome to CareerSphere : Placements Insights</h1><br>
-    <h3>Explore the opportunites..</h3>
+    <!-- Links Section with Tailwind Classes for Buttons and Spacing -->
+    <div class="p-3 grid gap-6 place-items-center">
+        <a href="{% url 'home1:kyc_chat' %}" class="text-lg text-white bg-blue-600 hover:bg-blue-700 py-2 px-4 rounded-full shadow-md transition duration-200 max-w-xs w-full text-center border-2 border-blue-600">
+            Know Your Company
+        </a>
+        <a href="corporate_dict/" class="text-lg text-white bg-blue-600 hover:bg-blue-700 py-2 px-4 rounded-full shadow-md transition duration-200 max-w-xs w-full text-center border-2 border-blue-600">
+            Company Jargon Dictionary
+        </a>
+        <a href="company_lib/" class="text-lg text-white bg-blue-600 hover:bg-blue-700 py-2 px-4 rounded-full shadow-md transition duration-200 max-w-xs w-full text-center border-2 border-blue-600">
+            Company Library
+        </a>
+    </div>
+    
+    
 
-    <a href="{% url "home2:news" %}">Tech News</a>
-    
-    <a href="{% url "home1:kyc_chat" %}">Know Your Company</a>
-    
-    <a href="corporate_dict/">Company Jargon Dictionary</a><br>
-    
-    <a href="company_lib/">Company Library</a>
-    
-    <a href="{% url "home3:success_story_list" %}">Success Stories</a>
-    {% if request.session.role_type %}
-        <div class="mt-5 alert alert-info">
-            <strong>User Type:</strong> {{ request.session.role_type }}
-        </div>
-    {% else %}
-        <div class="mt-5 alert alert-warning">
-            User Type session variable not set.
-        </div>
-    {% endif %}
-
-</center>
+    <!-- Conditional User Type Section with Alerts -->
+    <div class="mt-6">
+        {% if request.session.role_type %}
+            <div class="p-4 bg-blue-100 border-l-4 border-blue-500 text-gray-800">
+                <strong>User Type:</strong> {{ request.session.role_type }}
+            </div>
+        {% else %}
+            {% comment %} <div class="p-4 bg-yellow-100 border-l-4 border-yellow-500 text-gray-800">
+                User Type session variable not set.
+            </div> {% endcomment %}
+        {% endif %}
+    </div>
+</div>
 
 {% endblock content %}
