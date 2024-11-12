@@ -3,26 +3,36 @@
 {% block title %}Student Login{% endblock %}
 
 {% block content %}
-<h2 class="mb-4">Student Login</h2>
-<form method="post" action="/student/login/">
-    {% csrf_token %}
-    <div class="mb-3">
-        <label for="username" class="form-label">Username:</label>
-        <input type="text" name="username" id="username" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label for="password" class="form-label">Password:</label>
-        <input type="password" name="password" id="password" class="form-control" required>
-        {% if messages %}
-    {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
-            {{ message }}
-        </div>
-    {% endfor %}
-{% endif %}
+<div class="container mt-5">
+    <!-- Flexbox container to center the card horizontally -->
+    <div class="d-flex justify-content-center">
+        <!-- Card container with max-width and margin-top for spacing -->
+        <div class="card shadow-lg border-light p-4" style="width: 100%; max-width: 400px; margin-top: 50px;">
+            <h2 class="text-center mb-4 text-primary font-weight-bold">Student Login</h2>
+            
+            <form method="post" action="/student/login/">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" name="username" id="username" class="form-control shadow-sm" required>
+                </div>
 
+                <div class="mb-4">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" name="password" id="password" class="form-control shadow-sm" required>
+                </div>
+
+                <!-- Login Button -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+                </div>
+            </form>
+
+            <!-- Register Button -->
+            <div class="text-center mt-3">
+                <a href="/student/register/" class="btn btn-outline-secondary btn-sm">Register as Student</a>
+            </div>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary mb-3">Login</button>
-</form>
-<a href="/student/register/" class="btn btn-secondary">Register as Student</a>
+</div>
 {% endblock %}

@@ -1,11 +1,108 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>{{ story.story_title }}</h2>
-    <p>{{ story.story_content }}</p>
-    <p><strong>Posted on:</strong> {{ story.created_at }}</p>
-    {% if story.image.url %}
-        <img src="{{ story.image.url }}" alt="Story Image">
-    {% endif %}
-    <a href="/home/success_stories/">Back to Stories</a>
+    <div class="story-container">
+        <h2 class="story-title">{{ story.story_title }}</h2>
+        
+        <p class="story-content">{{ story.story_content }}</p>
+        
+        <p class="story-date"><strong>Posted on:</strong> {{ story.created_at }}</p>
+        
+        {% if story.image.url %}
+            <div class="story-image">
+                <img src="{{ story.image.url }}" alt="Story Image">
+            </div>
+        {% endif %}
+        
+        <div class="back-link">
+            <a href="/home/success_stories/" class="btn-back">Back to Stories</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block styles %}
+<!-- Custom CSS for Success Story Detail Page -->
+<style>
+    /* General container styling */
+    .story-container {
+        width: 100%;
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: #fff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    /* Title Styling */
+    .story-title {
+        font-size: 28px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    /* Content Styling */
+    .story-content {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #555;
+        margin-bottom: 20px;
+    }
+
+    /* Date Styling */
+    .story-date {
+        font-size: 14px;
+        color: #777;
+        margin-bottom: 20px;
+    }
+
+    /* Image Styling */
+    .story-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    /* Back Link Button Styling */
+    .back-link {
+        text-align: center;
+    }
+
+    .btn-back {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-back:hover {
+        background-color: #0056b3;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .story-container {
+            padding: 20px;
+        }
+
+        .story-title {
+            font-size: 24px;
+        }
+
+        .story-content {
+            font-size: 14px;
+        }
+
+        .story-date {
+            font-size: 12px;
+        }
+    }
+</style>
 {% endblock %}

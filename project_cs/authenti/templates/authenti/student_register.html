@@ -3,49 +3,150 @@
 {% block title %}Register{% endblock %}
 
 {% block content %}
-<h2 class="mb-4">Register as Student</h2>
-<form method="post" action="{% url 'student_register' %}">
-    {% csrf_token %}
-    <div class="mb-3">
-        <label for="username" class="form-label">Username:</label>
-        <input type="text" name="username" id="username" class="form-control" value="{{ form.username.value|default:'' }}" required>
-    </div>
-    <div class="mb-3">
-        <label for="email" class="form-label">Email:</label>
-        <input type="email" name="email" id="email" class="form-control" value="{{ form.email.value|default:'' }}" required>
-    </div>
-    <div class="mb-3">
-        <label for="password1" class="form-label">Password:</label>
-        <input type="password" name="password1" id="password1" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label for="password2" class="form-label">Confirm Password:</label>
-        <input type="password" name="password2" id="password2" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label for="admission_no" class="form-label">Admission Number:</label>
-        <input type="text" name="admission_no" id="admission_no" class="form-control" value="{{ form.admission_no.value|default:'' }}" required>
-    </div>
-    <div class="mb-3">
-        <label for="enrollment_year" class="form-label">Enrollment Year:</label>
-        <input type="number" name="enrollment_year" id="enrollment_year" class="form-control" value="{{ form.enrollment_year.value|default:'' }}" required>
-    </div>
-    <div class="mb-3">
-        <label for="current_year" class="form-label">Current Year:</label>
-        <input type="number" name="current_year" id="current_year" class="form-control" value="{{ form.current_year.value|default:'' }}" required>
-    </div>
-    <div class="mb-3">
-        <label for="expected_graduation_year" class="form-label">Expected Graduation Year:</label>
-        <input type="number" name="expected_graduation_year" id="expected_graduation_year" class="form-control" value="{{ form.expected_graduation_year.value|default:'' }}" required>
-    </div>
-    <div class="mb-3">
-        <label for="student_year" class="form-label">Student Year:</label>
-        <select name="student_year" id="student_year" class="form-select" required>
-            {% comment %} <option value="">Select Year</option> {% endcomment %}
-            <option value="First Year">First Year</option>
-            <option value="Final Year">Final Year</option>
-        </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Register</button>
-</form>
+<div class="container mt-5">
+    <h2 class="text-center mb-4 text-primary font-weight-bold">Register as Student</h2>
+    
+    <form method="post" action="{% url 'student_register' %}">
+        {% csrf_token %}
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10 col-12">
+                <!-- Username -->
+                <div class="mb-4">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" name="username" id="username" class="form-control shadow-sm" value="{{ form.username.value|default:'' }}" required>
+                </div>
+
+                <!-- Email -->
+                <div class="mb-4">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" name="email" id="email" class="form-control shadow-sm" value="{{ form.email.value|default:'' }}" required>
+                </div>
+
+                <!-- Password -->
+                <div class="mb-4">
+                    <label for="password1" class="form-label">Password</label>
+                    <input type="password" name="password1" id="password1" class="form-control shadow-sm" required>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="mb-4">
+                    <label for="password2" class="form-label">Confirm Password</label>
+                    <input type="password" name="password2" id="password2" class="form-control shadow-sm" required>
+                </div>
+
+                <!-- Admission Number -->
+                <div class="mb-4">
+                    <label for="admission_no" class="form-label">Admission Number</label>
+                    <input type="text" name="admission_no" id="admission_no" class="form-control shadow-sm" value="{{ form.admission_no.value|default:'' }}" required>
+                </div>
+
+                <!-- Enrollment Year -->
+                <div class="mb-4">
+                    <label for="enrollment_year" class="form-label">Enrollment Year</label>
+                    <input type="number" name="enrollment_year" id="enrollment_year" class="form-control shadow-sm" value="{{ form.enrollment_year.value|default:'' }}" required>
+                </div>
+
+                <!-- Current Year -->
+                <div class="mb-4">
+                    <label for="current_year" class="form-label">Current Year</label>
+                    <input type="number" name="current_year" id="current_year" class="form-control shadow-sm" value="{{ form.current_year.value|default:'' }}" required>
+                </div>
+
+                <!-- Expected Graduation Year -->
+                <div class="mb-4">
+                    <label for="expected_graduation_year" class="form-label">Expected Graduation Year</label>
+                    <input type="number" name="expected_graduation_year" id="expected_graduation_year" class="form-control shadow-sm" value="{{ form.expected_graduation_year.value|default:'' }}" required>
+                </div>
+
+                <!-- Student Year -->
+                <div class="mb-4">
+                    <label for="student_year" class="form-label">Student Year</label>
+                    <select name="student_year" id="student_year" class="form-select shadow-sm" required>
+                        <option value="First Year">First Year</option>
+                        <option value="Final Year">Final Year</option>
+                    </select>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="d-flex justify-content-center mb-3">
+                    <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 {% endblock %}
+
+{% block styles %}
+<!-- Custom CSS -->
+<style>
+    body {
+        background-color: #f4f7fa; /* Light gray background */
+    }
+
+    .container {
+        max-width: 900px;
+    }
+
+    .form-label {
+        font-weight: 500;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        padding: 0.75rem;
+    }
+
+    .form-select {
+        border-radius: 8px;
+        padding: 0.75rem;
+    }
+
+    .btn {
+        font-size: 1.1rem;
+        border-radius: 8px;
+        padding: 12px 25px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: #2575fc;
+        border-color: #2575fc;
+    }
+
+    .btn-primary:hover {
+        background-color: #1a63d1;
+        border-color: #1a63d1;
+    }
+
+    .btn-lg {
+        padding: 15px 25px;
+        font-size: 1.2rem;
+    }
+
+    .row {
+        margin-top: 30px;
+    }
+
+    h2 {
+        font-weight: bold;
+        color: #333;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 767px) {
+        .col-lg-8 {
+            max-width: 100%;
+        }
+    }
+
+    .shadow-sm {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .mb-4 {
+        margin-bottom: 1.5rem;
+    }
+</style>
+{% endblock %}
+    

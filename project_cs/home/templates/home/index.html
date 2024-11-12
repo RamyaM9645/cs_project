@@ -5,35 +5,109 @@
 {% endblock head %}
 
 {% block content %}
-<div class="container mt-4">
-    <div class="text-center mb-4">
-        <h1>Welcome to CareerSphere: Placement Insights</h1>
-        <h3>Explore the opportunities...</h3>
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 text-primary font-weight-bold">Welcome to Placement Networking System</h1>
+        <h3 class="text-secondary">Explore the opportunities...</h3>
     </div>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white rounded shadow-sm py-3">
         <div class="container-fluid justify-content-center">
-            <div class="navbar-nav">
-                <a class="nav-link btn btn-outline-primary mx-2" href="{% url 'home2:news' %}">Tech News</a>
-                <a class="nav-link btn btn-outline-primary mx-2" href="{% url 'home1:kyc_chat' %}">Know Your Company</a>
-                <a class="nav-link btn btn-outline-primary mx-2" href="#">Company Jargon Dictionary</a>
-                <a class="nav-link btn btn-outline-primary mx-2" href="#">Company Library</a>
-                <a class="nav-link btn btn-outline-primary mx-2" href="success_stories">Success Stories</a>            </div>
+            <div class="navbar-nav d-flex flex-wrap">
+                <a class="nav-link btn btn-outline-primary mx-2 my-2 shadow-sm text-bold" href="{% url 'home2:news' %}">Tech News</a>
+                <a class="nav-link btn btn-outline-primary mx-2 my-2 shadow-sm" href="{% url 'home1:kyc_chat' %}">Know Your Company</a>
+                <a class="nav-link btn btn-outline-primary mx-2 my-2 shadow-sm" href="#">Company Jargon Dictionary</a>
+                <a class="nav-link btn btn-outline-primary mx-2 my-2 shadow-sm" href="company_lib">Company Library</a>
+                <a class="nav-link btn btn-outline-primary mx-2 my-2 shadow-sm" href="success_stories">Success Stories</a>
+            </div>
         </div>
     </nav>
 
     <!-- Role Type Display -->
-    {% comment %} <div class="text-center mt-5">
+    {% comment %}
+    <div class="text-center mt-5">
         {% if request.session.role_type %}
-            <div class="alert alert-info">
+            <div class="alert alert-info mt-3 shadow-sm">
                 <strong>User Type:</strong> {{ request.session.role_type }}
             </div>
         {% else %}
-            <div class="alert alert-warning">
+            <div class="alert alert-warning mt-3 shadow-sm">
                 User Type session variable not set.
             </div>
         {% endif %}
-    </div> {% endcomment %}
+    </div>
+    {% endcomment %}
 </div>
 {% endblock content %}
+
+{% block styles %}
+<style>
+    /* General Container Styling */
+    body {
+        background-color: #f4f7fa; /* Light gray background for better readability */
+    }
+
+    .container {
+        max-width: 900px;
+    }
+
+    /* Heading Styling */
+    h1 {
+        font-size: 2.5rem;
+        color: #2c3e50;
+        font-weight: bold;
+    }
+
+    h3 {
+        font-weight: 500;
+        color: #6c757d;
+    }
+
+    /* Navbar Styling */
+    .navbar {
+        background-color: #ffffff;
+        border-radius: 10px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 1rem;
+        font-weight: normal; /* Removes bold text */
+        border-radius: 5px;
+        padding: 10px 20px;
+        color: #007bff;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+        background-color: #007bff;
+        color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Shadow and Spacing for Navbar Buttons */
+    .btn {
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Responsive Design for Navbar */
+    @media (max-width: 767px) {
+        .navbar-nav .nav-link {
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    /* Alert Styling for Role Type Display */
+    .alert {
+        font-size: 1.1rem;
+        border-radius: 5px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Button Spacing */
+    .navbar-nav .nav-link {
+        margin: 0.5rem 0.5rem;
+    }
+</style>
+{% endblock styles %}

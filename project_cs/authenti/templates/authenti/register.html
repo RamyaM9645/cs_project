@@ -3,41 +3,130 @@
 {% block title %}Register{% endblock %}
 
 {% block content %}
-<h2 class="mb-4">Register</h2>
-<form method="post" action="">
-    {% csrf_token %}
-    <div class="mb-3">
-        <label for="username" class="form-label">Username:</label>
-        <input type="text" name="username" id="username" class="form-control" value="{{ form.username.value|default:'' }}" required>
-    </div>
-    <div class="mb-3">
-        <label for="email" class="form-label">Email:</label>
-        <input type="email" name="email" id="email" class="form-control" value="{{ form.email.value|default:'' }}" required>
-    </div>
-    <div class="mb-3">
-        <label for="password1" class="form-label">Password:</label>
-        <input type="password" name="password1" id="password1" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label for="password2" class="form-label">Confirm Password:</label>
-        <input type="password" name="password2" id="password2" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label for="graduation_year" class="form-label">Graduation Year:</label>
-        <input type="number" name="graduation_year" id="graduation_year" class="form-control" value="{{ form.graduation_year.value|default:'' }}" required>
-    </div>
-    <div class="mb-3">
-        <label for="current_company" class="form-label">Current Company:</label>
-        <input type="text" name="current_company" id="current_company" class="form-control" value="{{ form.current_company.value|default:'' }}" required>
-    </div>
-    <div class="mb-3">
-        <label for="current_position" class="form-label">Current Position:</label>
-        <input type="text" name="current_position" id="current_position" class="form-control" value="{{ form.current_position.value|default:'' }}" required>
-    </div>
-    <div class="mb-3">
-        <label for="linkedIn_profile" class="form-label">LinkedIn Profile:</label>
-        <input type="url" name="linkedIn_profile" id="linkedIn_profile" class="form-control" value="{{ form.linkedIn_profile.value|default:'' }}">
-    </div>
-    <button type="submit" class="btn btn-primary">Register</button>
-</form>
+<div class="container mt-5">
+    <h2 class="text-center mb-4 text-primary font-weight-bold">Register as Alumni</h2>
+
+    <form method="post" action="">
+        {% csrf_token %}
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10 col-12">
+                <!-- Username -->
+                <div class="mb-4">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" name="username" id="username" class="form-control shadow-sm" value="{{ form.username.value|default:'' }}" required>
+                </div>
+
+                <!-- Email -->
+                <div class="mb-4">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" name="email" id="email" class="form-control shadow-sm" value="{{ form.email.value|default:'' }}" required>
+                </div>
+
+                <!-- Password -->
+                <div class="mb-4">
+                    <label for="password1" class="form-label">Password</label>
+                    <input type="password" name="password1" id="password1" class="form-control shadow-sm" required>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="mb-4">
+                    <label for="password2" class="form-label">Confirm Password</label>
+                    <input type="password" name="password2" id="password2" class="form-control shadow-sm" required>
+                </div>
+
+                <!-- Graduation Year -->
+                <div class="mb-4">
+                    <label for="graduation_year" class="form-label">Graduation Year</label>
+                    <input type="number" name="graduation_year" id="graduation_year" class="form-control shadow-sm" value="{{ form.graduation_year.value|default:'' }}" required>
+                </div>
+
+                <!-- Current Company -->
+                <div class="mb-4">
+                    <label for="current_company" class="form-label">Current Company</label>
+                    <input type="text" name="current_company" id="current_company" class="form-control shadow-sm" value="{{ form.current_company.value|default:'' }}" required>
+                </div>
+
+                <!-- Current Position -->
+                <div class="mb-4">
+                    <label for="current_position" class="form-label">Current Position</label>
+                    <input type="text" name="current_position" id="current_position" class="form-control shadow-sm" value="{{ form.current_position.value|default:'' }}" required>
+                </div>
+
+                <!-- LinkedIn Profile -->
+                <div class="mb-4">
+                    <label for="linkedIn_profile" class="form-label">LinkedIn Profile</label>
+                    <input type="url" name="linkedIn_profile" id="linkedIn_profile" class="form-control shadow-sm" value="{{ form.linkedIn_profile.value|default:'' }}">
+                </div>
+
+                <!-- Submit Button -->
+                <div class="d-flex justify-content-center mb-3">
+                    <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+    body {
+        background-color: #f4f7fa;
+    }
+
+    .container {
+        max-width: 900px;
+    }
+
+    .form-label {
+        font-weight: 500;
+    }
+
+    .form-control, .form-select {
+        border-radius: 8px;
+        padding: 0.75rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn {
+        font-size: 1.1rem;
+        border-radius: 8px;
+        padding: 12px 25px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: #2575fc;
+        border-color: #2575fc;
+    }
+
+    .btn-primary:hover {
+        background-color: #1a63d1;
+        border-color: #1a63d1;
+    }
+
+    .btn-lg {
+        padding: 15px 25px;
+        font-size: 1.2rem;
+    }
+
+    .row {
+        margin-top: 30px;
+    }
+
+    h2 {
+        font-weight: bold;
+        color: #333;
+    }
+
+    @media (max-width: 767px) {
+        .col-lg-8 {
+            max-width: 100%;
+        }
+    }
+
+    .mb-4 {
+        margin-bottom: 1.5rem;
+    }
+</style>
 {% endblock %}

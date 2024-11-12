@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% comment %} <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,6 +7,132 @@
     <!-- Include Bootstrap CSS for styling -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     
+</head>
+<body>
+    <!-- Main Content -->
+    <div class="container-fluid text-center">
+        <div class="overlay">
+            <h2 class="display-4 font-weight-bold mb-3">Welcome To Placement Networking System</h2>
+            <p class="lead mb-4">Connecting students and alumni for a brighter future</p>
+            <p class="mb-4">Please select an option below:</p>
+
+            <div class="d-flex justify-content-center gap-3 mt-4">
+                <a href="/student/register/" class="btn btn-primary btn-lg px-4">Register as Student</a>
+                <a href="/alumni/register/" class="btn btn-primary btn-lg px-4">Register as Alumni</a>
+                <a href="/student/login/" class="btn btn-secondary btn-lg px-4">Student Login</a>
+                <a href="/alumni/login/" class="btn btn-secondary btn-lg px-4">Alumni Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS for functionality -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html> {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Placement Networking System</title>
+
+    <!-- Include Bootstrap CSS for styling -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient background */
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container-fluid {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .display-4 {
+            font-size: 3rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .lead {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .btn {
+            padding: 12px 40px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #2575fc;
+            border-color: #2575fc;
+        }
+
+        .btn-primary:hover {
+            background-color: #6a11cb;
+            border-color: #6a11cb;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .d-flex {
+            gap: 20px;
+        }
+
+        .d-flex a {
+            text-decoration: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .display-4 {
+                font-size: 2.5rem;
+            }
+
+            .lead {
+                font-size: 1.1rem;
+            }
+
+            .btn {
+                font-size: 1rem;
+                padding: 10px 30px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Main Content -->
